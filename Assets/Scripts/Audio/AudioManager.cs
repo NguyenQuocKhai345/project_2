@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.Audio;
 using UnityEngine.UI;
 public class AudioManager : MonoBehaviour
 {
@@ -58,6 +57,25 @@ public class AudioManager : MonoBehaviour
     {
         Sound s = Array.Find(sounds, item => item.name == sound);
         s.source.Stop();
+    }
+    public void Pause(string sound)
+    {
+        Sound s = Array.Find(sounds, item => item.name == sound);
+        if (s == null)
+        {
+            return;
+        }
+        s.source.Pause(); // Tạm dừng nhạc
+    }
+
+    public void Resume(string sound)
+    {
+        Sound s = Array.Find(sounds, item => item.name == sound);
+        if (s == null)
+        {
+            return;
+        }
+        s.source.UnPause(); // Tiếp tục phát nhạc
     }
 
     public void ToggleMusic()

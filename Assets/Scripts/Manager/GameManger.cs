@@ -7,10 +7,12 @@ public class GameManger : MonoBehaviour
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private GameObject gameOverPanel;
     [SerializeField] private GameObject beginPanel;
+    [SerializeField] private GameObject pausePanel;
     void Start()
     {
         UpdateScoreText();
         gameOverPanel.SetActive(false);
+        pausePanel.SetActive(false);
         beginPanel.SetActive(true);
         StartCoroutine(HideBeginPanelAfterDelay(3f));
         // Update is called once per frame
@@ -50,9 +52,32 @@ public class GameManger : MonoBehaviour
         score = 0; // Reset the score to 0
         UpdateScoreText(); // Update the score text in the UI
         SceneManager.LoadScene(1); // Reload the current scene
+        AudioManager.instance.Play("BackGround");
     }
     public void BackToMenu()
     {
         SceneManager.LoadScene(0); // Load the menu scene
+    }
+    public void Pause(string sound)
+    {
+        Time.timeScale = 0; // Pause the game
+        pausePanel.SetActive(true); // Hiện bảng tạm dừng
+
+        // Tạm dừng nhạc nền thông qua AudioManager
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.Pause("BackGround");
+        }
+    }
+    public void Resume()
+    {
+        Time.timeScale = 1; // Resume the game
+        pausePanel.SetActive(false); // Ẩn bảng tạm dừng
+
+        // Tiếp tục phát nhạc nền thông qua AudioManager
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.Resume("BackGround");
+        }
     }
 }

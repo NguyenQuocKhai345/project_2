@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using System.Collections;
 public class PlayerCollison : MonoBehaviour
 {
     private GameManger gameManager; // Reference to the GameManager script
@@ -17,14 +17,30 @@ public class PlayerCollison : MonoBehaviour
         }
         else if (collision.CompareTag("Trap"))
         {
-            StartCoroutine(HandleTrapCollision());
+            PlayerHealth.health--;
+            if (PlayerHealth.health <= 0)
+            {
+                StartCoroutine(HandleTrapCollision());
+            }
+            else
+            {
+                StartCoroutine(GetHurt());
+            }
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.CompareTag("Gai"))
         {
-            StartCoroutine(HandleTrapCollision());
+            PlayerHealth.health--;
+            if (PlayerHealth.health <= 0)
+            {
+                StartCoroutine(HandleTrapCollision());
+            }
+            else
+            {
+                StartCoroutine(GetHurt());
+            }
         }
     }
 
@@ -33,5 +49,13 @@ public class PlayerCollison : MonoBehaviour
         yield return new WaitForSeconds(0.3f); // Wait for 2 seconds
         gameManager.GameOver(); // Call GameOver method in GameManager
         AudioManager.instance.Play("GameOver"); // Play GameOver sound
+    }
+    IEnumerator GetHurt()
+    {
+        Physics2D.IgnoreLayerCollision(6, 8);
+        GetComponent<Animator>().SetLayerWeight(1, 1);
+        yield return new WaitForSeconds(3);
+        GetComponent<Animator>().SetLayerWeight(1, 0);
+        Physics2D.IgnoreLayerCollision(6, 8, false);
     }
 }
