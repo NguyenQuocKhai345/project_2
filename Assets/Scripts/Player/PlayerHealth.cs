@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerHealth : MonoBehaviour
 {
-    public static int health = 3;
+    public static int health = 2;
 
     public Image[] hearts;
     public Sprite fullHeart;
@@ -13,7 +13,7 @@ public class PlayerHealth : MonoBehaviour
 
     void Awake()
     {
-        health = 3;
+        health = 2;
     }
     // Update is called once per frame
     void Update()

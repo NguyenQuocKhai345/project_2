@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 public class GameManger : MonoBehaviour
 {
@@ -48,15 +49,28 @@ public class GameManger : MonoBehaviour
     }
     public void RestartGame()
     {
-        Time.timeScale = 1; // Resume the game
-        score = 0; // Reset the score to 0
-        UpdateScoreText(); // Update the score text in the UI
-        SceneManager.LoadScene(1); // Reload the current scene
-        AudioManager.instance.Play("BackGround");
+        Time.timeScale = 1;
+        score = 0;
+        UpdateScoreText();
+        SceneManager.LoadScene(1);
+
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.Play("BackGround");
+            AudioManager.instance.SetMusicState(true); // <-- thêm dòng này
+            AudioManager.instance.UpdateButtonStates(); // cập nhật lại nút
+        }
     }
     public void BackToMenu()
     {
+        Time.timeScale = 1; // Ensure the game is not paused
         SceneManager.LoadScene(0); // Load the menu scene
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.Play("BackGround");
+            AudioManager.instance.SetMusicState(true); // <-- thêm dòng này
+            AudioManager.instance.UpdateButtonStates(); // cập nhật lại nút
+        }
     }
     public void Pause(string sound)
     {

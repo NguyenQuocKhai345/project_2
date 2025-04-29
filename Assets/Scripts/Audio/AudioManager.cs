@@ -9,6 +9,7 @@ public class AudioManager : MonoBehaviour
     public Button muteButton; // Gắn nút tắt nhạc từ Inspector
     public Button playButton; // Gắn nút bật nhạc từ Inspector
     private bool isMusicPlaying = true; // Biến để theo dõi trạng thái nhạc
+    public static bool isFirstLoad = true;
 
     void Awake()
     {
@@ -34,7 +35,7 @@ public class AudioManager : MonoBehaviour
         UpdateButtonStates();
     }
 
-    private void UpdateButtonStates()
+    public void UpdateButtonStates()
     {
         if (isMusicPlaying)
         {
@@ -45,6 +46,18 @@ public class AudioManager : MonoBehaviour
         {
             muteButton.gameObject.SetActive(false); // Ẩn nút tắt nhạc
             playButton.gameObject.SetActive(true);  // Hiện nút bật nhạc
+        }
+    }
+    public void SetMusicState(bool isPlaying)
+    {
+        isMusicPlaying = isPlaying;
+    }
+    public void UpdateRestart()
+    {
+        if (!isMusicPlaying)
+        {
+            muteButton.gameObject.SetActive(true);  // Hiện nút tắt nhạc
+            playButton.gameObject.SetActive(false); // Ẩn nút bật nhạc
         }
     }
     public void Play(string sound)
@@ -118,8 +131,14 @@ public class AudioManager : MonoBehaviour
         playButton = play;
 
         // Gán lại sự kiện click
-        muteButton.onClick.AddListener(ToggleMusic);
-        playButton.onClick.AddListener(ToggleMusic);
+        if (muteButton != null)
+        {
+            muteButton.onClick.AddListener(ToggleMusic);
+        }
+        if (playButton != null)
+        {
+            playButton.onClick.AddListener(ToggleMusic);
+        }
 
         // Cập nhật trạng thái nút
         UpdateButtonStates();
