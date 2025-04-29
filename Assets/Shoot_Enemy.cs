@@ -13,7 +13,7 @@ public class Shoot_Enemy : MonoBehaviour
 
     void Awake()
     {
-        EnsureSingletonInstance();
+        //EnsureSingletonInstance();
     }
 
     void Start()
@@ -22,17 +22,17 @@ public class Shoot_Enemy : MonoBehaviour
         StartShootingRoutine();
     }
 
-    private void EnsureSingletonInstance()
-    {
-        if (instance && instance != this)
-        {
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            instance = this;
-        }
-    }
+    // private void EnsureSingletonInstance()
+    // {
+    //     if (instance && instance != this)
+    //     {
+    //         Destroy(this.gameObject);
+    //     }
+    //     else
+    //     {
+    //         instance = this;
+    //     }
+    // }
 
     private void InitializeComponents()
     {
