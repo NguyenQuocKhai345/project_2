@@ -8,6 +8,7 @@ TagManager:
   - Trap
   - Gai
   - Ground
+  - Bullet
   layers:
   - Default
   - TransparentFX

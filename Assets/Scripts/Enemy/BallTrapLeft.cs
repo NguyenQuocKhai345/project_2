@@ -16,9 +16,13 @@ public class BallTrapLeft : MonoBehaviour
             // Đặt vận tốc để quả cầu tự động di chuyển sang trái
             rb.linearVelocity = Vector2.left * speed;
         }
-        else
+    }
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        // Kiểm tra nếu va chạm với Player hoặc Gai
+        if (collision.collider.CompareTag("Player") || collision.collider.CompareTag("Gai"))
         {
-            Debug.LogError("Không tìm thấy Rigidbody2D trên LargeBall!");
+            Destroy(this.gameObject); // Hủy quả cầu
         }
     }
 }

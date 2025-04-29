@@ -22,9 +22,13 @@ public class PlayerCollison : MonoBehaviour
             {
                 StartCoroutine(HandleTrapCollision());
             }
-            else
+        }
+        else if (collision.CompareTag("Bullet"))
+        {
+            PlayerHealth.health--;
+            if (PlayerHealth.health <= 0)
             {
-                StartCoroutine(GetHurt());
+                StartCoroutine(HandleTrapCollision());
             }
         }
     }
@@ -37,10 +41,6 @@ public class PlayerCollison : MonoBehaviour
             {
                 StartCoroutine(HandleTrapCollision());
             }
-            else
-            {
-                StartCoroutine(GetHurt());
-            }
         }
     }
 
@@ -49,13 +49,5 @@ public class PlayerCollison : MonoBehaviour
         yield return new WaitForSeconds(0.3f); // Wait for 2 seconds
         gameManager.GameOver(); // Call GameOver method in GameManager
         AudioManager.instance.Play("GameOver"); // Play GameOver sound
-    }
-    IEnumerator GetHurt()
-    {
-        Physics2D.IgnoreLayerCollision(6, 8);
-        GetComponent<Animator>().SetLayerWeight(1, 1);
-        yield return new WaitForSeconds(3);
-        GetComponent<Animator>().SetLayerWeight(1, 0);
-        Physics2D.IgnoreLayerCollision(6, 8, false);
     }
 }

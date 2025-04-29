@@ -22,18 +22,6 @@ public class Shoot_Enemy : MonoBehaviour
         StartShootingRoutine();
     }
 
-    // private void EnsureSingletonInstance()
-    // {
-    //     if (instance && instance != this)
-    //     {
-    //         Destroy(this.gameObject);
-    //     }
-    //     else
-    //     {
-    //         instance = this;
-    //     }
-    // }
-
     private void InitializeComponents()
     {
         enemyRigidbody = GetComponent<Rigidbody2D>();
@@ -51,7 +39,7 @@ public class Shoot_Enemy : MonoBehaviour
         while (true)
         {
             ShootFromAllGuns();
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(5f);
         }
     }
 

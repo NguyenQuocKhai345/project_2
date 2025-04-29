@@ -6,6 +6,7 @@ public class Mace2 : MonoBehaviour
     int dir = 1;
     public Transform rightCheck;
     public Transform leftCheck;
+
     void Start()
     {
     }
@@ -14,16 +15,17 @@ public class Mace2 : MonoBehaviour
     void FixedUpdate()
     {
         transform.Translate(Vector2.right * speed * Time.fixedDeltaTime * dir);
-        if (Physics2D.Raycast(transform.position, Vector2.right, 0.5f, LayerMask.GetMask("Check")))
+
+        // Kiểm tra nếu bên dưới rightCheck không có mặt đất
+        if (!Physics2D.Raycast(rightCheck.position, Vector2.down, 0.5f))
         {
             dir = -1; // Đổi hướng sang trái
         }
 
-        // Kiểm tra va chạm với leftCheck
-        if (Physics2D.Raycast(transform.position, Vector2.left, 0.5f, LayerMask.GetMask("Check")))
+        // Kiểm tra nếu bên dưới leftCheck không có mặt đất
+        if (!Physics2D.Raycast(leftCheck.position, Vector2.down, 0.5f))
         {
             dir = 1; // Đổi hướng sang phải
         }
-
     }
 }
