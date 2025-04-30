@@ -47,7 +47,7 @@ public class Shoot_Enemy : MonoBehaviour
     {
         foreach (var gun in guns)
         {
-            gun.ShootBullet(facingRight); // <-- dùng biến facingRight
+            gun.ShootBullet(facingRight, false); // <-- dùng biến facingRight
         }
     }
 }

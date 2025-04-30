@@ -10,7 +10,7 @@ public class Shoots : MonoBehaviour
         originalXPosition = transform.localPosition.x;
     }
 
-    public void ShootBullet(bool isFacingRight)
+    public void ShootBullet(bool isFacingRight, bool isFacingDown)
     {
         if (isFacingRight)
         {
@@ -22,6 +22,11 @@ public class Shoots : MonoBehaviour
         }
 
         GameObject bulletInstance = Instantiate(bulletPrefab, this.transform.position, Quaternion.identity);
+        if (isFacingDown)
+        {
+            bulletInstance.GetComponent<Rigidbody2D>().AddForce(Vector2.down * 500 * (isFacingDown ? 1 : -1));
+            return;
+        }
         bulletInstance.GetComponent<Rigidbody2D>().AddForce(Vector2.right * 500 * (isFacingRight ? 1 : -1));
     }
 }
