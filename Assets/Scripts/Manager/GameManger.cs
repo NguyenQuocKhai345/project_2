@@ -7,14 +7,18 @@ public class GameManger : MonoBehaviour
     private int score = 0; // Player's score
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private GameObject gameOverPanel;
+    [SerializeField] private GameObject gameWinPanel;
     [SerializeField] private GameObject beginPanel;
     [SerializeField] private GameObject pausePanel;
+    [SerializeField] private GameObject buttonPause;
+
     void Start()
     {
         UpdateScoreText();
         gameOverPanel.SetActive(false);
         pausePanel.SetActive(false);
         beginPanel.SetActive(true);
+        buttonPause.SetActive(true);
         StartCoroutine(HideBeginPanelAfterDelay(3f));
         // Update is called once per frame
     }
@@ -42,6 +46,18 @@ public class GameManger : MonoBehaviour
         score = 0; // Reset the score to 0
         Time.timeScale = 0; // Pause the game
         gameOverPanel.SetActive(true); // Show the game over panel
+        buttonPause.SetActive(false);
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.Stop("BackGround");
+        }
+    }
+    public void GameWin()
+    {
+        Time.timeScale = 0; // Pause the game
+        pausePanel.SetActive(false);
+        gameWinPanel.SetActive(true); // Show the game over panel
+        buttonPause.SetActive(false);
         if (AudioManager.instance != null)
         {
             AudioManager.instance.Stop("BackGround");

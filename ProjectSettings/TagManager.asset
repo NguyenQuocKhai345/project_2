@@ -9,6 +9,7 @@ TagManager:
   - Gai
   - Ground
   - Bullet
+  - Key
   layers:
   - Default
   - TransparentFX

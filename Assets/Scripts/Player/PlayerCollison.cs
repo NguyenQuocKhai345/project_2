@@ -31,6 +31,10 @@ public class PlayerCollison : MonoBehaviour
                 StartCoroutine(HandleTrapCollision());
             }
         }
+        else if (collision.CompareTag("Key"))
+        {
+            gameManager.GameWin(); // Call GameWin method in GameManager
+        }
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
