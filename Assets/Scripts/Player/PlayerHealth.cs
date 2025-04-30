@@ -13,7 +13,7 @@ public class PlayerHealth : MonoBehaviour
 
     void Awake()
     {
-        health = 2;
+        health = 1000;
     }
     // Update is called once per frame
     void Update()
