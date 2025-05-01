@@ -302,8 +302,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Inspector\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 1048.8
-    y: 79.200005
+    x: 1049.8
+    y: 24
     width: 486.19995
     height: 690.8
   m_SerializedDataModeController:
@@ -352,7 +352,7 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 79.200005
+    y: 24
     width: 253.4
     height: 424.4
   m_SerializedDataModeController:
@@ -369,8 +369,8 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 88e20100
-      m_LastClickedID: 123528
+      m_SelectedIDs: 
+      m_LastClickedID: 0
       m_ExpandedIDs: 4c64feff1e65feffa684feff4e85feff5a8bfeff4a8dfeff7c01fffff211ffffd415ffffeae20100
       m_RenameOverlay:
         m_UserAcceptedRename: 0
@@ -417,8 +417,8 @@ MonoBehaviour:
     m_TextWithWhitespace: "Scene\u200B"
   m_Pos:
     serializedVersion: 2
-    x: 254.40001
-    y: 79.200005
+    x: 255.4
+    y: 24
     width: 792.4
     height: 424.4
   m_SerializedDataModeController:
@@ -1159,7 +1159,7 @@ MonoBehaviour:
       height: 864
     m_MinimalGUI: 1
   m_defaultScale: 0.46689814
-  m_LastWindowPixelSize: {x: 990.5, y: 530.5}
+  m_LastWindowPixelSize: {x: 792.4, y: 424.4}
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 01000000000000000000
@@ -1294,7 +1294,7 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 529.60004
+    y: 474.4
     width: 1047.8
     height: 240.4
   m_SerializedDataModeController:
@@ -1338,7 +1338,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 79}
     m_SelectedIDs: c4170100
     m_LastClickedID: 71620
-    m_ExpandedIDs: 0000000028f600003afd000000ca9a3b
+    m_ExpandedIDs: 0000000060be0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1367,7 +1367,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: d2b4ffff
     m_LastClickedID: 0
-    m_ExpandedIDs: 
+    m_ExpandedIDs: 0000000060be0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
