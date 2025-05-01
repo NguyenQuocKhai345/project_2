@@ -11,6 +11,7 @@ TagManager:
   - Bullet
   - Key
   - DeathZone
+  - Heart
   layers:
   - Default
   - TransparentFX
