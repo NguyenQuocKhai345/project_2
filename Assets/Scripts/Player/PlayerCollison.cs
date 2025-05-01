@@ -35,6 +35,19 @@ public class PlayerCollison : MonoBehaviour
         {
             gameManager.GameWin(); // Call GameWin method in GameManager
         }
+        else if (collision.CompareTag("DeathZone"))
+        {
+            PlayerHealth.health--;
+            if (PlayerHealth.health <= 0)
+            {
+                StartCoroutine(HandleTrapCollision());
+            }
+            else 
+            {
+                GameObject player = GameObject.FindWithTag("Player");
+                player.transform.position = new Vector3(151, 8, 0); // Reset player position
+            }
+        }
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
