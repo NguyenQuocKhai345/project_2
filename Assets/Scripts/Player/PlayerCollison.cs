@@ -3,9 +3,11 @@ using System.Collections;
 public class PlayerCollison : MonoBehaviour
 {
     private GameManger gameManager; // Reference to the GameManager script
+    private PlayerHealth playerHealth; // Reference to the PlayerHealth script
     private void Awake()
     {
         gameManager = FindAnyObjectByType<GameManger>(); // Find the GameManager in the scene
+        playerHealth = FindAnyObjectByType<PlayerHealth>(); // Find the PlayerHealth in the scene
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -15,34 +17,31 @@ public class PlayerCollison : MonoBehaviour
             gameManager.AddScore(1); // Add score when the player collides with a coin
             AudioManager.instance.Play("Coin"); // Play coin sound
         }
-        else if (collision.CompareTag("Trap"))
+        else if (collision.CompareTag("Heart"))
         {
-            PlayerHealth.health--;
-            if (PlayerHealth.health <= 0)
-            {
-                StartCoroutine(HandleTrapCollision());
-            }
+            Destroy(collision.gameObject); // Destroy the coin object
+            playerHealth.AddHeart(1); // Add score when the player collides with a coin
         }
-        else if (collision.CompareTag("Bullet"))
+        else if (collision.CompareTag("Trap") || collision.CompareTag("Bullet"))
         {
-            PlayerHealth.health--;
-            if (PlayerHealth.health <= 0)
+            playerHealth.DecreaseHealth(1);
+            if (playerHealth.IsDead())
             {
-                StartCoroutine(HandleTrapCollision());
+                StartCoroutine(DelayGameOver());
             }
         }
         else if (collision.CompareTag("Key"))
         {
-            gameManager.GameWin(); // Call GameWin method in GameManager
+            StartCoroutine(DelayGameWin());
         }
         else if (collision.CompareTag("DeathZone"))
         {
-            PlayerHealth.health--;
-            if (PlayerHealth.health <= 0)
+            playerHealth.DecreaseHealth(1);
+            if (playerHealth.IsDead())
             {
-                StartCoroutine(HandleTrapCollision());
+                StartCoroutine(DelayGameOver());
             }
-            else 
+            else
             {
                 GameObject player = GameObject.FindWithTag("Player");
                 player.transform.position = new Vector3(151, 8, 0); // Reset player position
@@ -53,18 +52,24 @@ public class PlayerCollison : MonoBehaviour
     {
         if (collision.collider.CompareTag("Gai"))
         {
-            PlayerHealth.health--;
-            if (PlayerHealth.health <= 0)
+            playerHealth.DecreaseHealth(1);
+            if (playerHealth.IsDead())
             {
-                StartCoroutine(HandleTrapCollision());
+                StartCoroutine(DelayGameOver());
             }
         }
     }
 
-    private System.Collections.IEnumerator HandleTrapCollision()
+    private System.Collections.IEnumerator DelayGameOver()
     {
         yield return new WaitForSeconds(0.3f); // Wait for 2 seconds
         gameManager.GameOver(); // Call GameOver method in GameManager
         AudioManager.instance.Play("GameOver"); // Play GameOver sound
+    }
+    private System.Collections.IEnumerator DelayGameWin()
+    {
+        yield return new WaitForSeconds(0.3f); // Wait for 2 seconds
+        gameManager.GameWin(); // Call GameOver method in GameManager
+        AudioManager.instance.Play("GameWin"); // Play GameOver sound
     }
 }
