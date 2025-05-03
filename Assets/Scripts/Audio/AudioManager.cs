@@ -5,11 +5,11 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager instance;
 
-    public Sound[] sounds;
+    public Sound[] sounds; // Mảng chứa âm thanh
     public Button muteButton; // Gắn nút tắt nhạc từ Inspector
     public Button playButton; // Gắn nút bật nhạc từ Inspector
     private bool isMusicPlaying = true; // Biến để theo dõi trạng thái nhạc
-    public static bool isFirstLoad = true;
+    public static bool isFirstLoad = true; // Biến để xem có phải là lần load scene đầu hay ko
 
     void Awake()
     {
@@ -23,21 +23,21 @@ public class AudioManager : MonoBehaviour
 
         foreach (Sound s in sounds)
         {
-            s.source = gameObject.AddComponent<AudioSource>();
-            s.source.clip = s.clip;
-            s.source.volume = s.volume;
-            s.source.pitch = s.pitch;
-            s.source.loop = s.loop;
+            s.source = gameObject.AddComponent<AudioSource>(); // Tên
+            s.source.clip = s.clip; // Source âm thanh
+            s.source.volume = s.volume; // Âm lượng
+            s.source.pitch = s.pitch; // Tốc độ phát
+            s.source.loop = s.loop; // Lặp lại âm thanh
         }
     }
     void Start()
     {
-        UpdateButtonStates();
+        UpdateButtonStates(); // Cập nhật trạng thái nút tắt, bật âm thanh
     }
 
     public void UpdateButtonStates()
     {
-        if (isMusicPlaying)
+        if (isMusicPlaying) // Nếu nhạc đang phát
         {
             muteButton.gameObject.SetActive(true);  // Hiện nút tắt nhạc
             playButton.gameObject.SetActive(false); // Ẩn nút bật nhạc
@@ -52,6 +52,7 @@ public class AudioManager : MonoBehaviour
     {
         isMusicPlaying = isPlaying;
     }
+    // Cập nhật khi mình restart game, lúc đó âm thanh nhạc nền luôn đc bật
     public void UpdateRestart()
     {
         if (!isMusicPlaying)
@@ -90,7 +91,7 @@ public class AudioManager : MonoBehaviour
         }
         s.source.UnPause(); // Tiếp tục phát nhạc
     }
-
+    // Tắt, bật nhạc nền
     public void ToggleMusic()
     {
         Sound s = Array.Find(sounds, item => item.name == "BackGround");
@@ -114,6 +115,7 @@ public class AudioManager : MonoBehaviour
             playButton.gameObject.SetActive(false); // Ẩn nút bật nhạc
         }
     }
+    // Đồng bộ trạng thái các nút tắt, bật âm thanh khi từ Menu Vào Game
     public void SyncButtons(Button mute, Button play)
     {
         // Gỡ listener cũ (nếu có)
@@ -129,7 +131,6 @@ public class AudioManager : MonoBehaviour
         // Cập nhật button mới
         muteButton = mute;
         playButton = play;
-
         // Gán lại sự kiện click
         if (muteButton != null)
         {

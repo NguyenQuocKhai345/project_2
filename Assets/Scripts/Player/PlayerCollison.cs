@@ -2,8 +2,8 @@ using UnityEngine;
 using System.Collections;
 public class PlayerCollison : MonoBehaviour
 {
-    private GameManger gameManager; // Reference to the GameManager script
-    private PlayerHealth playerHealth; // Reference to the PlayerHealth script
+    private GameManger gameManager;
+    private PlayerHealth playerHealth;
     private void Awake()
     {
         gameManager = FindAnyObjectByType<GameManger>(); // Find the GameManager in the scene
@@ -13,14 +13,14 @@ public class PlayerCollison : MonoBehaviour
     {
         if (collision.CompareTag("Coin"))
         {
-            Destroy(collision.gameObject); // Destroy the coin object
-            gameManager.AddScore(1); // Add score when the player collides with a coin
-            AudioManager.instance.Play("Coin"); // Play coin sound
+            Destroy(collision.gameObject); // Destroy coin
+            gameManager.AddScore(1); // Add score 
+            AudioManager.instance.Play("Coin"); // Phát âm thanh khi ăn coin
         }
         else if (collision.CompareTag("Heart"))
         {
-            Destroy(collision.gameObject); // Destroy the coin object
-            playerHealth.AddHeart(1); // Add score when the player collides with a coin
+            Destroy(collision.gameObject); // Destroy heart
+            playerHealth.AddHeart(1); // Add heart
         }
         else if (collision.CompareTag("Trap") || collision.CompareTag("Bullet"))
         {
@@ -30,6 +30,7 @@ public class PlayerCollison : MonoBehaviour
                 StartCoroutine(DelayGameOver());
             }
         }
+        // Nếu va chạm với chìa khóa thì Win
         else if (collision.CompareTag("Key"))
         {
             StartCoroutine(DelayGameWin());
