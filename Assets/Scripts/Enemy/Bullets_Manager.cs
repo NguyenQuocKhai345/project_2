@@ -11,6 +11,7 @@ public class Bullets_Manager : MonoBehaviour
     {
         yield return new WaitForSeconds(2f);
         Destroy(this.gameObject);
+        // Xóa đạn sau 2 giây
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
@@ -18,5 +19,6 @@ public class Bullets_Manager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+        // Xóa đạn khi va chạm với Player hoặc Ground
     }
 }

@@ -9,11 +9,11 @@ public class Shoot_Enemy : MonoBehaviour
     public static Shoot_Enemy instance;
 
     [Header("Shooting Settings")]
-    public bool facingRight = true; // <-- thêm biến public chọn hướng
+    public bool facingRight = true; // Chọn hướng
 
     void Awake()
     {
-        //EnsureSingletonInstance();
+
     }
 
     void Start()
@@ -24,6 +24,7 @@ public class Shoot_Enemy : MonoBehaviour
 
     private void InitializeComponents()
     {
+        // Khởi tạo thành phần cần thiếtthiết
         enemyRigidbody = GetComponent<Rigidbody2D>();
         guns = GetComponentsInChildren<Shoots>();
         shootingCoroutine = ShootingRoutine();
@@ -36,18 +37,20 @@ public class Shoot_Enemy : MonoBehaviour
 
     IEnumerator ShootingRoutine()
     {
+        // Bắn 3s 1 lần 
         while (true)
         {
             ShootFromAllGuns();
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(3f);
         }
     }
 
     private void ShootFromAllGuns()
     {
+        // Bắn từ tất cả các súng
         foreach (var gun in guns)
         {
-            gun.ShootBullet(facingRight, false); // <-- dùng biến facingRight
+            gun.ShootBullet(facingRight, false); //dùng biến facingRight để điều khiển chiều bắnbắn
         }
     }
 }
