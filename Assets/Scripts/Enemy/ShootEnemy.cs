@@ -1,12 +1,12 @@
 using UnityEngine;
 using System.Collections;
 
-public class Shoot_Enemy : MonoBehaviour
+public class ShootEnemy : MonoBehaviour
 {
     IEnumerator shootingCoroutine;
     Rigidbody2D enemyRigidbody;
     Shoots[] guns;
-    public static Shoot_Enemy instance;
+    public static ShootEnemy instance;
 
     [Header("Shooting Settings")]
     public bool facingRight = true; // Chọn hướng

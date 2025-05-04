@@ -3,11 +3,11 @@ using System.Collections;
 public class ShootDown : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    
+
     IEnumerator shootingCoroutine;
     Rigidbody2D enemyRigidbody;
     Shoots[] guns;
-    public static Shoot_Enemy instance;
+    public static ShootEnemy instance;
 
     [Header("Shooting Settings")]
     public bool facingRight = true; // <-- thêm biến public chọn hướng

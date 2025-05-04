@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class Bullets_Manager : MonoBehaviour
+public class BulletManager : MonoBehaviour
 {
     void Start()
     {
